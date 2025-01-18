@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CategoryList } from "../ui/category-list";
 import { Category } from "@/modules/core/types";
+import Image from "next/image";
 
 interface Props {
   categories: Category[];
@@ -11,23 +12,21 @@ export const Header = ({ categories = [] }: Props) => {
     <header>
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-          <Link href="#" className="flex items-center">
-            <img
-              src="https://flowbite.com/docs/images/logo.svg"
-              className="mr-3 h-6 sm:h-9"
-              alt="Flowbite Logo"
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/logo.png"
+              alt="Logo de Osnet"
+              width={72}
+              height={50}
             />
-            <span className="self-center text-xl font-semibold whitespace-nowrap">
-              Osnet
-            </span>
           </Link>
           <div className="flex items-center lg:order-2">
-            <a
-              href="#"
+            <Link
+              href="/api/auth/login"
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
             >
               Iniciar sesión
-            </a>
+            </Link>
             <button
               data-collapse-toggle="mobile-menu-2"
               type="button"
