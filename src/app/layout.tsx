@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { UserProvider } from "@auth0/nextjs-auth0/client";
 
 import { Header } from "@/modules/shared/components/layout/header";
 import { Category } from "@/modules/core/types";
 import "./globals.css";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,14 +20,11 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <UserProvider>
-        <body
-          className=""
-        >
-          <Header categories={categories} />
-          {children}
-        </body>
-      </UserProvider>
+      <body className="">
+        <Header categories={categories} />
+        {children}
+        <Script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js" />
+      </body>
     </html>
   );
 }
