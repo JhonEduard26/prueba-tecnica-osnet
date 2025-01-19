@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 
-import { Header } from "@/modules/shared/components/layout/header";
 import { Category } from "@/modules/core/types";
+import { Header } from "@/modules/shared/components/layout/header";
 import "./globals.css";
-import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,11 +18,14 @@ export default async function RootLayout({
   const categories: Category[] = await data.json();
 
   return (
-    <html lang="en">
+    <html lang="es">
+      <head>
+      </head>
       <body className="">
         <Header categories={categories} />
         {children}
-        <Script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js" />
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script src="/flowbite.min.js"></script>
       </body>
     </html>
   );

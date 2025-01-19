@@ -24,9 +24,10 @@ export const Paginator = ({
     <div className="flex justify-center">
       <button
         className={clsx(
-          "flex items-center justify-center px-4 h-10 me-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-900",
+          "flex items-center justify-center px-4 h-10 me-3 text-base font-medium text-gray-700 border border-gray-300 rounded-lg",
           {
             "cursor-not-allowed bg-gray-300": isFirstPage,
+            "bg-white hover:bg-gray-100 hover:text-gray-900": !isFirstPage,
           }
         )}
         onClick={onPreviousPage}
@@ -40,9 +41,10 @@ export const Paginator = ({
       </div>
       <button
         className={clsx(
-          "flex items-center justify-center px-4 h-10 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-900",
+          "flex items-center justify-center px-4 h-10 text-base font-medium text-gray-700 border border-gray-300 rounded-lg",
           {
             "cursor-not-allowed bg-gray-300": isLastPage,
+            "bg-white hover:bg-gray-100 hover:text-gray-900": !isLastPage,
           }
         )}
         onClick={onNextPage}

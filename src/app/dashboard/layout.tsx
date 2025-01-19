@@ -1,5 +1,5 @@
-import { Navbar } from "@/modules/dashboard/components/navbar";
-import { Sidebar } from "@/modules/dashboard/components/sidebar";
+import { Navbar } from "@/modules/dashboard/components/layout/navbar";
+import { Sidebar } from "@/modules/dashboard/components/layout/sidebar";
 import { auth0 } from "@/modules/core/lib/auth0";
 import { redirect } from "next/navigation";
 
@@ -9,7 +9,6 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }>) {
   const session = await auth0.getSession();
-  console.log("🚀 ~ session:", session)
 
   if (!session) {
     redirect('/auth/login')
