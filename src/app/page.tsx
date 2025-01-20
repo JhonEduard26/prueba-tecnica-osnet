@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
+
+import { getProducts } from "@/modules/core/services/fakestore";
+import { Loader } from "@/modules/shared/components/ui/loader";
 import { Paginator } from "@/modules/shared/components/layout/paginator";
 import { ProductList } from "@/modules/shared/components/ui/product-list";
-import { Loader } from "@/modules/shared/components/ui/loader";
 import type { Product } from "@/modules/core/types";
 
 export default function Home() {
@@ -15,8 +17,7 @@ export default function Home() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const data = await fetch("https://fakestoreapi.com/products");
-      const products: Product[] = await data.json();
+      const products = await getProducts()
       setProducts(products);
       setIsLoading(false);
     };

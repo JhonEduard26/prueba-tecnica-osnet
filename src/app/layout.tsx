@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
-import { Category } from "@/modules/core/types";
 import { Header } from "@/modules/shared/components/layout/header";
+import { getCategories } from "@/modules/core/services/fakestore";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,13 +14,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const data = await fetch("https://fakestoreapi.com/products/categories");
-  const categories: Category[] = await data.json();
+  const categories = await getCategories();
 
   return (
     <html lang="es">
-      <head>
-      </head>
+      <head></head>
       <body className="">
         <Header categories={categories} />
         {children}

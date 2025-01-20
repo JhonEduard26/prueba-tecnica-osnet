@@ -1,9 +1,12 @@
-import { Table } from "@/modules/dashboard/components/ui/table";
-import type { Product } from "@/modules/core/types";
+"use client";
 
-export default async function Page() {
-  const data = await fetch("https://fakestoreapi.com/products");
-  const products: Product[] = await data.json();
+import { Table } from "@/modules/dashboard/components/ui/table";
+import { useProducts } from "@/modules/dashboard/hooks/useProducts";
+import { Loader } from "@/modules/shared/components/ui/loader";
+
+export default function Page() {
+  const { products, isLoading, onDeleteProduct, onUpdateProduct } =
+    useProducts();
 
   return (
     <div>
@@ -16,7 +19,15 @@ export default async function Page() {
           Agregar producto
         </button>
       </div>
-      <Table products={products} />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Table
+          products={products}
+          onDeleteProduct={onDeleteProduct}
+          onUpdateProduct={onUpdateProduct}
+        />
+      )}
     </div>
   );
 }
