@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 
-import { getProducts } from "@/modules/core/services/fakestore";
-import { Product } from "@/modules/core/types";
+import { getCategories, getProducts } from "@/modules/core/services/fakestore";
+import { Category, Product } from "@/modules/core/types";
 
 export const useProducts = () => {
+  const [categories, setCategories] = useState<Category[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -13,8 +14,19 @@ export const useProducts = () => {
       setProducts(products);
       setIsLoading(false);
     };
+
+    const fetchCategories = async () => {
+      const categories = await getCategories();
+      setCategories(categories);
+    };
+
     fetchProducts();
+    fetchCategories();
   }, []);
+
+  const onCreateProduct = (newProduct: Product) => {
+    setProducts((prevProducts) => [...prevProducts, newProduct]);
+  };
 
   const onDeleteProduct = (id: number) => {
     setProducts((prevProducts) =>
@@ -31,8 +43,10 @@ export const useProducts = () => {
   };
 
   return {
+    categories,
     products,
     isLoading,
+    onCreateProduct,
     onDeleteProduct,
     onUpdateProduct,
   };

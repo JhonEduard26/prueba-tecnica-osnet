@@ -1,6 +1,5 @@
 import { Product } from "@/modules/core/types";
 import Image from "next/image";
-import Link from "next/link";
 
 interface Props {
   product: Product;
@@ -8,8 +7,8 @@ interface Props {
 
 export const ProductCard = ({ product }: Props) => {
   return (
-    <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow">
-      <div className="flex justify-center items-center">
+    <div className="flex flex-col w-full h-full justify-between max-w-sm bg-white border border-gray-200 rounded-lg shadow">
+      <div className="px-5 pb-5">
         <Image
           className="p-8 aspect-square object-contain rounded-t-lg"
           src={product.image}
@@ -17,13 +16,11 @@ export const ProductCard = ({ product }: Props) => {
           width={300}
           height={300}
         />
-      </div>
-      <div className="px-5 pb-5">
-        <Link href="#">
+        <div>
           <h5 className="text-xl font-semibold tracking-tight text-gray-900">
             {product.title}
           </h5>
-        </Link>
+        </div>
         <div className="flex items-center mt-2.5 mb-2.5">
           <div className="flex items-center space-x-1 rtl:space-x-reverse">
             <svg
@@ -71,15 +68,15 @@ export const ProductCard = ({ product }: Props) => {
             {product.rating.rate} ({product.rating.count})
           </span>
         </div>
-        <ul className="flex items-center gap-4 mb-5">
-          <li className="flex items-center gap-2">
-            <p className="capitalize text-sm font-medium text-gray-500">
-              {product.category}
-            </p>
-          </li>
-        </ul>
+        <p className="mt-2.5 mb-2.5 capitalize text-sm font-medium text-gray-500">
+          {product.category}
+        </p>
+      </div>
+      <div className="px-5 pb-5">
         <div className="flex items-center justify-between">
-          <span className="text-3xl font-bold text-gray-900">${product.price}</span>
+          <span className="text-3xl font-bold text-gray-900">
+            ${product.price}
+          </span>
           <a
             href="#"
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"

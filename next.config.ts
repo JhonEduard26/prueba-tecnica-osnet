@@ -11,6 +11,13 @@ const nextConfig: NextConfig = {
         pathname: '/img/**',
         search: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'i.pravatar.cc',
+        port: '',
+        pathname: '/**',
+        search: '',
+      }
     ],
   },
 };
