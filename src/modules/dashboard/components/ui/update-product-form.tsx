@@ -1,11 +1,12 @@
-import type { Product } from "@/modules/core/types";
+import type { Category, Product } from "@/modules/core/types";
 import { CloseIcon } from "@/modules/shared/icons/close-icon";
 
 interface Props {
   product: Product;
+  categories: Category[];
 }
 
-export const UpdateProductForm = ({ product }: Props) => {
+export const UpdateProductForm = ({ product, categories }: Props) => {
   const onCloseDialog = () => {
     const updateDialog = document.getElementById(
       `update-dialog-${product.id}`
@@ -94,15 +95,19 @@ export const UpdateProductForm = ({ product }: Props) => {
           </label>
           <select
             id="countries"
+            name="category"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           >
             <option value="" disabled selected>
               Elige una categoria
             </option>
-            <option value="US">United States</option>
-            <option value="CA">Canada</option>
-            <option value="FR">France</option>
-            <option value="DE">Germany</option>
+            {
+              categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))
+            }
           </select>
         </div>
 

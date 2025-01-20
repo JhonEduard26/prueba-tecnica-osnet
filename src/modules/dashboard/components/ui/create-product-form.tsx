@@ -37,7 +37,7 @@ export const CreateProductForm = ({ categories }: Props) => {
             htmlFor="title"
             className="block mb-2 text-sm font-medium text-gray-900"
           >
-            Titulo del producto
+            Título del producto
           </label>
           <input
             type="text"
@@ -53,7 +53,7 @@ export const CreateProductForm = ({ categories }: Props) => {
             htmlFor="description"
             className="block mb-2 text-sm font-medium text-gray-900"
           >
-            Decripción
+            Descripción
           </label>
           <textarea
             id="description"

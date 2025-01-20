@@ -2,17 +2,19 @@
 
 import Image from "next/image";
 
-import type { Product } from "@/modules/core/types";
+import type { Category, Product } from "@/modules/core/types";
 import { UpdateProductForm } from "./update-product-form";
 
 interface Props {
   products: Product[];
+  categories: Category[];
   onDeleteProduct: (id: number) => void;
   onUpdateProduct: (id: number, updatedProduct: Product) => void;
 }
 
 export const Table = ({
   products,
+  categories,
   onDeleteProduct,
   onUpdateProduct,
 }: Props) => {
@@ -43,12 +45,16 @@ export const Table = ({
         const price = (
           updateForm.elements.namedItem("price") as HTMLInputElement
         ).value;
+        const category = (
+          updateForm.elements.namedItem("category") as HTMLSelectElement
+        ).value as Category;
 
         onUpdateProduct(id, {
           ...updatedProduct,
           title,
           description,
           price: Number(price),
+          category,
         });
         updateDialog.close();
       };
@@ -110,7 +116,7 @@ export const Table = ({
                 >
                   Editar
                 </button>
-                <UpdateProductForm product={product} />
+                <UpdateProductForm product={product} categories={categories} />
               </td>
               <td className="px-4 py-2 text-right">
                 <button

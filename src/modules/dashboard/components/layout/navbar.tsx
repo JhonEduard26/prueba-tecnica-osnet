@@ -1,6 +1,11 @@
+import { auth0 } from "@/modules/core/lib/auth0";
 import Image from "next/image";
+import Link from "next/link";
 
-export const Navbar = () => {
+export const Navbar = async () => {
+  const session = await auth0.getSession();
+  const user = session?.user;
+
   return (
     <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200">
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
@@ -32,7 +37,7 @@ export const Navbar = () => {
                 src="/logo.png"
                 alt="Logo de Osnet"
                 width={80}
-                height={32}
+                height={40}
               />
             </a>
           </div>
@@ -45,11 +50,13 @@ export const Navbar = () => {
                   aria-expanded="false"
                   data-dropdown-toggle="dropdown-user"
                 >
-                  <span className="sr-only">Open user menu</span>
-                  <img
-                    className="w-8 h-8 rounded-full"
-                    src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                    alt="user photo"
+                  <span className="sr-only">Abrir menu del usuario</span>
+                  <Image
+                    className="rounded-full"
+                    src={user?.picture || "https://i.pravatar.cc"}
+                    alt={user?.nickname || "Sin nombre"}
+                    width={32}
+                    height={32}
                   />
                 </button>
               </div>
@@ -59,50 +66,32 @@ export const Navbar = () => {
               >
                 <div className="px-4 py-3" role="none">
                   <p className="text-sm text-gray-900" role="none">
-                    Neil Sims
+                    {user?.nickname || "Sin nombre"}
                   </p>
                   <p
                     className="text-sm font-medium text-gray-900 truncate"
                     role="none"
                   >
-                    neil.sims@flowbite.com
+                    {user?.email || "Sin correo"}
                   </p>
                 </div>
                 <ul className="py-1" role="none">
                   <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      role="menuitem"
-                    >
-                      Dashboard
-                    </a>
-                  </li>
+                      <Link
+                        href="/"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        role="menuitem"
+                      >
+                        Ir a la página principal
+                      </Link>
+                    </li>
                   <li>
                     <a
-                      href="#"
+                      href="/auth/logout"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       role="menuitem"
                     >
-                      Settings
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      role="menuitem"
-                    >
-                      Earnings
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      role="menuitem"
-                    >
-                      Sign out
+                      Cerrar sesión
                     </a>
                   </li>
                 </ul>

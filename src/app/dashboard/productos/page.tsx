@@ -55,10 +55,8 @@ export default function Page() {
     }
   };
 
-
-
   return (
-    <div>
+    <div className="mt-20">
       <div className="flex justify-between items-center mb-12">
         <h2>Listado de productos</h2>
         <button
@@ -75,6 +73,7 @@ export default function Page() {
       ) : (
         <Table
           products={products}
+          categories={categories}
           onDeleteProduct={onDeleteProduct}
           onUpdateProduct={onUpdateProduct}
         />

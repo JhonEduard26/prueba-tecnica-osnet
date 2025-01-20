@@ -3,7 +3,6 @@ import Link from "next/link";
 import { BagIcon } from "@/modules/shared/icons/bag-icon";
 import { ChartPieIcon } from "@/modules/shared/icons/chart-pie-icon";
 import { LogoutIcon } from "@/modules/shared/icons/logout-icon";
-import { UsersIcon } from "@/modules/shared/icons/users";
 
 export const Sidebar = () => {
   return (
@@ -21,15 +20,6 @@ export const Sidebar = () => {
             >
               <ChartPieIcon />
               <span className="ms-3">Dashboard</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/dashboard/usuarios"
-              className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
-            >
-              <UsersIcon />
-              <span className="flex-1 ms-3 whitespace-nowrap">Usuarios</span>
             </Link>
           </li>
           <li>
