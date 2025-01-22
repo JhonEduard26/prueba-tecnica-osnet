@@ -1,15 +1,17 @@
 "use client";
 
 import Image from "next/image";
+import { v4 as uuidv4 } from "uuid";
 
-import type { Category, Product } from "@/modules/core/types";
+import { ConfirmAlert } from "./confirm-alert";
 import { UpdateProductForm } from "./update-product-form";
+import type { Category, Product } from "@/modules/core/types";
 
 interface Props {
   products: Product[];
   categories: Category[];
-  onDeleteProduct: (id: number) => void;
-  onUpdateProduct: (id: number, updatedProduct: Product) => void;
+  onDeleteProduct: (id: string) => void;
+  onUpdateProduct: (id: string, updatedProduct: Product) => void;
 }
 
 export const Table = ({
@@ -18,11 +20,11 @@ export const Table = ({
   onDeleteProduct,
   onUpdateProduct,
 }: Props) => {
-  const handleDeleteProduct = (id: number) => {
+  const handleDeleteProduct = (id: string) => {
     onDeleteProduct(id);
   };
 
-  const handleUpdateProduct = (id: number, updatedProduct: Product) => {
+  const handleUpdateProduct = (id: string, updatedProduct: Product) => {
     const updateDialog = document.getElementById(
       `update-dialog-${id}`
     ) as HTMLDialogElement;
@@ -90,10 +92,13 @@ export const Table = ({
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
-            <tr className="bg-white border-b hover:bg-gray-50" key={product.id}>
+          {products.map((product, index) => (
+            <tr
+              className="bg-white border-b hover:bg-gray-50"
+              key={uuidv4()}
+            >
               <th scope="row" className="px-4 py-2 font-medium text-gray-900">
-                {product.id}
+                {index + 1}
               </th>
               <td className="flex justify-center items-center px-4 py-2">
                 <Image
@@ -119,15 +124,10 @@ export const Table = ({
                 <UpdateProductForm product={product} categories={categories} />
               </td>
               <td className="px-4 py-2 text-right">
-                <button
-                  data-modal-target={`popup-modal-${product.id}`}
-                  data-modal-toggle={`popup-modal-${product.id}`}
-                  className="font-medium text-red-600 hover:underline"
-                  type="button"
-                  onClick={() => handleDeleteProduct(product.id)}
-                >
-                  Eliminar
-                </button>
+                <ConfirmAlert
+                  id={product.id}
+                  onConfirmAction={() => handleDeleteProduct(product.id)}
+                />
               </td>
             </tr>
           ))}

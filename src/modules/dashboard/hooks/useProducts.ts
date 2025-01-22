@@ -28,13 +28,13 @@ export const useProducts = () => {
     setProducts((prevProducts) => [...prevProducts, newProduct]);
   };
 
-  const onDeleteProduct = (id: number) => {
+  const onDeleteProduct = (id: string) => {
     setProducts((prevProducts) =>
       prevProducts.filter((product) => product.id !== id)
     );
   };
 
-  const onUpdateProduct = (id: number, updatedProduct: Product) => {
+  const onUpdateProduct = (id: string, updatedProduct: Product) => {
     setProducts((prevProducts) =>
       prevProducts.map((product) =>
         product.id === id ? updatedProduct : product

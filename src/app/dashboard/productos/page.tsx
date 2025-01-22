@@ -6,6 +6,7 @@ import { CreateProductForm } from "@/modules/dashboard/components/ui/create-prod
 import { Loader } from "@/modules/shared/components/ui/loader";
 import { Table } from "@/modules/dashboard/components/ui/table";
 import { useProducts } from "@/modules/dashboard/hooks/useProducts";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Page() {
   const { categories, products, isLoading, onCreateProduct, onDeleteProduct, onUpdateProduct } =
@@ -40,7 +41,7 @@ export default function Page() {
         const imageBase64 = imageFile ? await convertToBase64(imageFile) : 'https://i.pravatar.cc/';
 
         const newProduct = {
-          id: products.length + 1,
+          id: uuidv4(),
           title,
           description,
           price: parseFloat(price),

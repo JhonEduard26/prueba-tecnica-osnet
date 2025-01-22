@@ -1,3 +1,6 @@
+import { v4 as uuidv4 } from 'uuid'
+import type { Product } from '../types';
+
 export const getCategories = async () => {
   try {
     const response = await fetch("https://fakestoreapi.com/products/categories");
@@ -12,22 +15,11 @@ export const getProducts = async () => {
   try {
     const response = await fetch("https://fakestoreapi.com/products");
     const products = await response.json();
-    return products;
-  } catch (error) {
-    console.error(error);
-  }
-};
 
-export const getProductById = async (id: number) => {
-  try {
-    const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-    const product = await response.json();
-
-    if (!response.ok) {
-      throw new Error(product.message);
-    }
-
-    return product;
+    return products.map((product: Product) => ({
+      ...product,
+      id: uuidv4(),
+    }))
   } catch (error) {
     console.error(error);
   }
